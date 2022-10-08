@@ -1,5 +1,4 @@
 const { User, Book } = require('../models');
-// import sign token function from auth
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 
@@ -36,7 +35,7 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        // save a book to a users 'savedBooks' field by adding it to the set (this prevents duplicates)
+        // save a book to a users 'savedBooks' field by adding it to the set to prevent duplicates from being saved
         saveBook: async (parent, { input }, context) => {
             if (context.user) {
                 const user = User.findByIdAndUpdate(
