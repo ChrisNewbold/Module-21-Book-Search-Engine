@@ -1,4 +1,4 @@
-const { User, Book } = require('../models');
+const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 
@@ -36,11 +36,11 @@ const resolvers = {
             return { token, user };
         },
         // save a book to a users 'savedBooks' field by adding it to the set to prevent duplicates from being saved
-        saveBook: async (parent, { input }, context) => {
+        saveBook: async (parent, { book }, context) => {
             if (context.user) {
                 const user = User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $push: { savedBooks: input } },
+                    { $push: { savedBooks: book } },
                     { new: true, runValidators: true }
                 );
                 return user;
