@@ -28,7 +28,7 @@ const SearchBooks = () => {
 
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
-  }, []);
+  }, [savedBookIds]);
 
   // useEffect(() => {
   //   return () => saveBookIds(savedBookIds);
@@ -81,14 +81,17 @@ const SearchBooks = () => {
       return false;
     }
 
-    try {
-      const { data } = await saveBook({
-        variables: { book: { ...bookToSave } },
-      });
+    // try {
+    //   const { data } = await saveBook({
+    //     variables: { book: { ...bookToSave } },
+    //   });
 
+    try {
+      await saveBook({ variables: { input: bookToSave } });
 
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      console.log('Successfully saved book!');
     } catch (err) {
       console.error(err);
     }
