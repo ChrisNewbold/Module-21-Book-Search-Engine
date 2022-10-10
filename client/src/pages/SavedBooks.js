@@ -12,11 +12,16 @@ const SavedBooks = () => {
   const [removeBook] = useMutation(REMOVE_BOOK);
 
   const userData = data?.me || {};
+  // useEffect(() => {
+  //   refetch()
+  // });
+  // console.log(userData)
   // this activates the refetch method from the GET_ME query
   useEffect(() => {
     refetch()
-  });
+  }, []);
   console.log(userData)
+
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {

@@ -30,7 +30,7 @@ const resolvers = {
             return { token, user };
         },
         // Creates a user, sign a token, and send it back
-        addUser: async (parent, args) => {
+        addUser: async (parent, args) => { // replaced this { username, email, password } with args
             const user = await User.create(args);
             const token = signToken(user);
             return { token, user };

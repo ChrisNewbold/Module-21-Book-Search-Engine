@@ -32,7 +32,7 @@ const SignupForm = () => {
       const response = await addUser({
         variables: { ...userFormData }
       });
-
+      console.log(response)
 
       const { token, user } = response.data.addUser
       console.log(user);
